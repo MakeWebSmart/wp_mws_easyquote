@@ -1,3 +1,17 @@
+=== Plugin Name ===
+Contributors: azraf
+Donate link: http://azraf.me/ 
+Tags: wordpress,wordpress-plugin,wordpress-form,wordpress-forms,quoting,multi-step-form
+Requires at least: 4.0
+Tested up to: 4.9.8
+Stable tag: 4.3
+Requires PHP: 5.5
+License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+
+
 **How to use it**
 
 To use the plugin after you install it to your wordpress website, you have to create a "page" with slug "easy-quote" or you can use shortcode [MWS_EASYQUOTE] 
@@ -14,6 +28,10 @@ After Installation, you will find a menu named "EasyQuote" in your wordpress adm
 4. You can re-order your product/model list with the menu **Reorder Model Lists** 
 5. You can Add short-code to display form or any other content at the end of the quoting form, from the menu **EasyQuote Option Page**
 6. You can customize the quoting form first step name with the option **First step field name** found in the menu page **EasyQuote Option Page**
+
+
+
+
 
 ---
 ## GitHub Repository
