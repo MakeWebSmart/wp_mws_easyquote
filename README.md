@@ -39,15 +39,18 @@ After Installation, you will find a menu named "EasyQuote" in your wordpress adm
 6. You can customize the quoting form first step name with the option **First step field name** found in the menu page **EasyQuote Option Page**
 
 
-
-
-
 ---
+
+## multistep Plugin Install and options:
+https://youtu.be/lIiPOMS6IjA
+
+
 ## GitHub Repository
 https://github.com/MakeWebSmart/wp_mws_easyquote
 
 ## Author GitHub profile
 https://github.com/azraf
 
-## Youtube:
-https://youtu.be/lIiPOMS6IjA
+## Author online profile
+http://azraf.me
+
