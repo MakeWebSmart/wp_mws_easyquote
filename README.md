@@ -1,12 +1,21 @@
 === Plugin Name ===
+
 Contributors: azraf
+
 Donate link: http://azraf.me/ 
+
 Tags: wordpress,wordpress-plugin,wordpress-form,wordpress-forms,quoting,multi-step-form
+
 Requires at least: 4.0
+
 Tested up to: 4.9.8
+
 Stable tag: 4.3
+
 Requires PHP: 5.5
+
 License: GPLv2 or later
+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
