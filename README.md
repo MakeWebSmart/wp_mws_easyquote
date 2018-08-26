@@ -50,4 +50,4 @@ https://github.com/MakeWebSmart/wp_mws_easyquote
 https://github.com/azraf
 
 ## Youtube:
-https://youtu.be/MguX98ccFlY 
+https://youtu.be/lIiPOMS6IjA
