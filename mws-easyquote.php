@@ -11,7 +11,7 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 add_action('wp_enqueue_scripts', 'callback_for_setting_up_scripts');
 function callback_for_setting_up_scripts() 
 {
-    wp_register_style( 'mwseasyquotecss',  plugins_url('assets/form.css?t='.time(),__FILE__ ) );
+    wp_register_style( 'mwseasyquotecss',  plugins_url('assets/form.css',__FILE__ ) );
     wp_enqueue_style( 'mwseasyquotecss' );
     wp_enqueue_script( 'jqueryeasinhg1',  'http://thecodeplayer.com/uploads/js/jquery.easing.min.js', array( 'jquery' ) );
     wp_enqueue_script( 'mwseasyquotejs',  plugins_url('assets/form.js',__FILE__ ), array( 'jquery' ) );
