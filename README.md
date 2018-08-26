@@ -41,9 +41,8 @@ After Installation, you will find a menu named "EasyQuote" in your wordpress adm
 
 ---
 
-## multistep Plugin Install and options:
+## Multistep Quoting Plugin Install and setting up:
 https://youtu.be/lIiPOMS6IjA
-
 
 ## GitHub Repository
 https://github.com/MakeWebSmart/wp_mws_easyquote
