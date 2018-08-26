@@ -11,8 +11,8 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 add_action('wp_enqueue_scripts', 'callback_for_setting_up_scripts');
 function callback_for_setting_up_scripts() 
 {
-    wp_register_style( 'namespace',  plugins_url('assets/form.css?t='.time(),__FILE__ ) );
-    wp_enqueue_style( 'namespace' );
+    wp_register_style( 'mwseasyquotecss',  plugins_url('assets/form.css?t='.time(),__FILE__ ) );
+    wp_enqueue_style( 'mwseasyquotecss' );
     wp_enqueue_script( 'jqueryeasinhg1',  'http://thecodeplayer.com/uploads/js/jquery.easing.min.js', array( 'jquery' ) );
     wp_enqueue_script( 'mwseasyquotejs',  plugins_url('assets/form.js',__FILE__ ), array( 'jquery' ) );
     wp_enqueue_script( 'mwsquoteformprocess',  plugins_url('assets/form-process-front.js',__FILE__ ), array( 'jquery' ) );
@@ -25,7 +25,7 @@ function easy_quote_adminscripts()
     wp_enqueue_style('mwsbootstrapiso');
     wp_enqueue_script( 'mwsjquerysortable',  plugins_url('assets/jquery-sortable-min.js',__FILE__ ), array( 'jquery' ) );
     wp_enqueue_script( 'mwsformprogress',  plugins_url('assets/form-process.js',__FILE__ ), array( 'jquery' ) );
-    wp_enqueue_script('your_namespace');
+    
 }
 add_action( 'admin_init','easy_quote_adminscripts');
 
