@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Easy Quote
-Plugin URI: 
+Plugin URI: https://github.com/MakeWebSmart/wp_mws_easyquote
 Description: A simple WordPress OnePage Quote plugin 
-Version: 1.3
+Version: 1.5
 Author: Azraf Anam
 Author URI: http://azraf.me
 */
