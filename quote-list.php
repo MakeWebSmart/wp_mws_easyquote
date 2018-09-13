@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 $jsonFile = 'models.json';
 $option_mws_models = 'mws_easyquote_items';
 global $wp;
@@ -10,17 +12,22 @@ $retContent = json_decode($jsonContent);
 if($jsonContent !== false){
     $retData = json_decode($jsonContent, true);
 }
-
-if (isset($_POST['updateorder'])) {
-    $newArr = [];
-    foreach($_POST['modelorder'] as $k=>$v){
-        $newArr[$k] = $retData['models'][$v];
-    }
-    update_option($option_mws_models, json_encode(array('models' => $newArr)));
-    $jsonContent = get_option($option_mws_models);
-    $retContent = json_decode($jsonContent);
-    if($jsonContent !== false){
-        $retData = json_decode($jsonContent, true);
+if ( isset($_POST)) {
+    if ( current_user_can( 'manage_options' ) ) {
+        if (isset($_POST['updateorder'])) {
+            $newArr = [];
+            foreach($_POST['modelorder'] as $k=>$v){
+                $newArr[$k] = $retData['models'][$v];
+            }
+            update_option($option_mws_models, json_encode(array('models' => $newArr)));
+            $jsonContent = get_option($option_mws_models);
+            $retContent = json_decode($jsonContent);
+            if($jsonContent !== false){
+                $retData = json_decode($jsonContent, true);
+            }
+        }
+    } else {
+        echo "You dont have sufficient privilege to perform any action!";
     }
 }
 ?>
@@ -46,11 +53,19 @@ if (isset($_POST['updateorder'])) {
             </li>
             <?php endforeach; ?>
         </ol>
+        <?php
+        if ( current_user_can( 'manage_options' ) ) {
+        ?>
         <input type="submit" name="updateorder" class="btn btn-danger" value="Submit New Order" />
+        <?php
+        } else {
+            echo "You dont have sufficient privilege to save new order of the list!";
+        }
+        ?>
     </form>
     <?php } else {
     ?>
-    <p>No Data Found! You should save some data first.</p>
+    <p>No Data Found! Please save some data first.</p>
         <?php 
     } 
     ?>

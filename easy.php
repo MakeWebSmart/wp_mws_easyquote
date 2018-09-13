@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 global $wp;
 // $homeUrl =  home_url();
 $currentUrl =  home_url( $wp->request );
@@ -30,7 +32,7 @@ if($jsonOptions !== false){
 	}
 }
 
-function setModelImage($filename=''){
+function mwseq_setModelImage($filename=''){
 	$image_root = dirname(dirname(dirname(dirname(__FILE__)))).'model_images/';
 	$image_home = home_url('model_images/');
 	$defaultImage = plugins_url('/images/iPhone.png',__FILE__ );
@@ -91,7 +93,7 @@ echo '<script type="text/javascript">
 						<li class="wpir_select_field wpir_field_wrap" data-field_value="<?php echo $index;?>">
 							<label class="wpir_field_input" for="<?php echo $index;?>">
 								<a href="#/" class="modelselect" title="<?php echo $obj->modelname;?>" id="model-<?php echo $index;?>">
-									<img class="item-image" src="<?php echo setModelImage($obj->imagefile);?>">
+									<img class="item-image" src="<?php echo mwseq_setModelImage($obj->imagefile);?>">
 									<div class="item-label"><?php echo $obj->modelname;?></div>
 								</a>
 							</label>

@@ -37,25 +37,25 @@ jQuery(document).ready(function ($) {
         var labelID = $(this).attr('for');
         if(dataObj !== undefined && dataObj){
             modelObj = dataObj['models'][labelID]; 
-            console.log('modelSelected')
-            console.log(modelObj)
+            // console.log('modelSelected')
+            // console.log(modelObj)
             modelStr = 'Model Selected: <span>' + modelObj.modelname + '</span>'
             $('#modelid').val(labelID);
             if(modelObj.issue1name !== undefined && modelObj.issue1name){
-                console.log('issue1name')
-                console.log(modelObj.issue1name)
+                // console.log('issue1name')
+                // console.log(modelObj.issue1name)
                 $('#inputissue1').val(modelObj.issue1price);
                 $('#priceissue1').html(modelObj.issue1price);
                 $('.labelissue1').html(modelObj.issue1name);
             }
             if(modelObj.issue2name !== undefined && modelObj.issue2name){
-                console.log(modelObj.issue2name)
+                // console.log(modelObj.issue2name)
                 $('#inputissue2').val(modelObj.issue2price);
                 $('#priceissue2').html(modelObj.issue2price);
                 $('.labelissue2').html(modelObj.issue2name);
             }
             if(modelObj.issue3name !== undefined && modelObj.issue3name){
-                console.log(modelObj.issue3name)
+                // console.log(modelObj.issue3name)
                 $('#inputissue3').val(modelObj.issue3price);
                 $('#priceissue3').html(modelObj.issue3price);
                 $('.labelissue3').html(modelObj.issue3name);
@@ -129,6 +129,6 @@ jQuery(document).ready(function ($) {
             $("#form5 input[name=info]").val(infostr);
             
         }
-        console.log(price,issue1price,issue2price,issue3price);
+        // console.log(price,issue1price,issue2price,issue3price);
      });
 });

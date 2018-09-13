@@ -1,33 +1,32 @@
 <?php
 /*
 Plugin Name: Easy Quote
-Plugin URI: https://github.com/MakeWebSmart/wp_mws_easyquote
-Description: A simple WordPress OnePage Quote plugin 
-Version: 1.5
+Plugin URI:  https://github.com/MakeWebSmart/wp_mws_easyquote
+Description: A simple WordPress OnePage Quote plugin by MakeWebSmart(mws)
+Version: 1.3
 Author: Azraf Anam
 Author URI: http://azraf.me
 */
-defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
-add_action('wp_enqueue_scripts', 'callback_for_setting_up_scripts');
-function callback_for_setting_up_scripts() 
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+add_action('wp_enqueue_scripts', 'mwseq_callback_scripts');
+function mwseq_callback_scripts() 
 {
-    wp_register_style( 'mwseasyquotecss',  plugins_url('assets/form.css',__FILE__ ) );
-    wp_enqueue_style( 'mwseasyquotecss' );
-    wp_enqueue_script( 'jqueryeasinhg1',  'http://thecodeplayer.com/uploads/js/jquery.easing.min.js', array( 'jquery' ) );
-    wp_enqueue_script( 'mwseasyquotejs',  plugins_url('assets/form.js',__FILE__ ), array( 'jquery' ) );
-    wp_enqueue_script( 'mwsquoteformprocess',  plugins_url('assets/form-process-front.js',__FILE__ ), array( 'jquery' ) );
+    wp_register_style( 'mwseq_formcss',  plugins_url('assets/form.css?t='.time(),__FILE__ ) );
+    wp_enqueue_style( 'mwseq_formcss' );
+    wp_enqueue_script( 'mwseq_jqueryeasinhg',  plugins_url('assets/jquery.easing.min.js',__FILE__ ), array( 'jquery' ) );
+    wp_enqueue_script( 'mwseq_formjs',  plugins_url('assets/form.js',__FILE__ ), array( 'jquery' ) );
+    wp_enqueue_script( 'mwseq_formprocess',  plugins_url('assets/form-process-front.js',__FILE__ ), array( 'jquery' ) );
 }
 
 
-function easy_quote_adminscripts() 
+function mws_easy_quote_adminscripts() 
 {
-    wp_register_style('mwsbootstrapiso', plugins_url('assets/bootstrap-iso.css',__FILE__ ));
-    wp_enqueue_style('mwsbootstrapiso');
-    wp_enqueue_script( 'mwsjquerysortable',  plugins_url('assets/jquery-sortable-min.js',__FILE__ ), array( 'jquery' ) );
-    wp_enqueue_script( 'mwsformprogress',  plugins_url('assets/form-process.js',__FILE__ ), array( 'jquery' ) );
-    
+    wp_register_style('mwseq_bootstrapiso', plugins_url('assets/bootstrap-iso.css',__FILE__ ));
+    wp_enqueue_style('mwseq_bootstrapiso');
+    wp_enqueue_script( 'mwseq_jquerysortable',  plugins_url('assets/jquery-sortable-min.js',__FILE__ ), array( 'jquery' ) );
+    wp_enqueue_script( 'mwseq_formprogress',  plugins_url('assets/form-process.js',__FILE__ ), array( 'jquery' ) );
 }
-add_action( 'admin_init','easy_quote_adminscripts');
+add_action( 'admin_init','mws_easy_quote_adminscripts');
 
 
 function mws_easyquote_init()
@@ -47,15 +46,15 @@ function mws_easyquote_frontpage()
 
 add_action( 'wp', 'mws_easyquote_init' );
 add_shortcode('MWS_EASYQUOTE', 'mws_easyquote_frontpage');
-add_action('admin_menu', 'easy_quote_menu');
-function easy_quote_menu()
+add_action('admin_menu', 'mws_easy_quote_menu');
+function mws_easy_quote_menu()
 {
-    add_menu_page(__('EasyQuote', 'easyquote'), __('EasyQuote', 'easyquote'), 'manage_options', 'mws_easyquote_admin', 'easyquote_admin_page',plugins_url('easyquote.ico',__FILE__ ));
-    add_submenu_page('mws_easyquote_admin', 'List Models', 'Reorder Model List', 'manage_options', 'mws_easyquote_list', 'easyquote_list_page');
-    add_submenu_page('mws_easyquote_admin', 'Options', 'EasyQuote Options', 'manage_options', 'mws_easyquote_options', 'easyquote_options_page');
+    add_menu_page(__('EasyQuote', 'easyquote'), __('EasyQuote', 'easyquote'), 'manage_options', 'mws_easyquote_admin', 'mws_easyquote_admin_page',plugins_url('easyquote.ico',__FILE__ ));
+    add_submenu_page('mws_easyquote_admin', 'List Models', 'Reorder Model List', 'manage_options', 'mws_easyquote_list', 'mws_easyquote_list_page');
+    add_submenu_page('mws_easyquote_admin', 'Options', 'EasyQuote Options', 'manage_options', 'mws_easyquote_options', 'mws_easyquote_options_page');
 }
 
-function easyquote_admin_page()
+function mws_easyquote_admin_page()
 {
     if (!current_user_can('manage_options')) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
@@ -63,7 +62,7 @@ function easyquote_admin_page()
     include_once dirname(__FILE__) . '/admin-quote.php';
 }
 
-function easyquote_list_page()
+function mws_easyquote_list_page()
 {
     if (!current_user_can('manage_options')) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
@@ -72,7 +71,7 @@ function easyquote_list_page()
     die();
 }
 
-function easyquote_options_page()
+function mws_easyquote_options_page()
 {
     if (!current_user_can('manage_options')) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
@@ -98,14 +97,19 @@ if(!function_exists('mws_helpline')){
     }
 }
 
-if(!function_exists('_d')){
-    function _d($var, $str = '')
-    {
-        if (!empty($str)) {
-            echo '<br />' . $str . '<br />';
-        } 
-        echo '<pre>';
-        print_r($var);
-        echo '</pre>';
-    }
-}
+/**
+ * Function for dump array or variables
+ * 
+ * Only for testing purpose
+ */
+// if(!function_exists('mws_d')){
+//     function mws_d($var, $str = '')
+//     {
+//         if (!empty($str)) {
+//             echo '<br />' . $str . '<br />';
+//         } 
+//         echo '<pre>';
+//         print_r($var);
+//         echo '</pre>';
+//     }
+// }

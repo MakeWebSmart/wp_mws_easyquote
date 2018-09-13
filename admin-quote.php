@@ -1,4 +1,6 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+
 $option_mws_models = 'mws_easyquote_items';
 global $wp;
 
@@ -8,59 +10,67 @@ $image_root = dirname(dirname(dirname(dirname(__FILE__)))).'/model_images/';
 $image_home = home_url('model_images/');
 $defaultImage = plugins_url('images/iPhone.png',__FILE__ );
 
-if (isset($_POST['modeladdform'])) {
-    $jsonContent = get_option($option_mws_models); 
-    if($jsonContent !== false){
-        $data = json_decode($jsonContent, true);
-        unset($_POST["modeladdform"]);
-        $data["models"] = array_values($data["models"]);
-        array_push($data["models"], $_POST);
-        update_option($option_mws_models, json_encode($data));
-        // _d('Data',$data);
-    }else{
-        unset($_POST["modeladdform"]);
-        add_option($option_mws_models, json_encode(array('models' => array($_POST))));
+if ( isset($_POST)) {
+    if ( current_user_can( 'manage_options' ) ) {
+        /* A user with admin privileges */
+        
+        if (isset($_POST['modeladdform'])) {
+            $jsonContent = get_option($option_mws_models); 
+            if($jsonContent !== false){
+                $data = json_decode($jsonContent, true);
+                unset($_POST["modeladdform"]);
+                $data["models"] = array_values($data["models"]);
+                array_push($data["models"], $_POST);
+                update_option($option_mws_models, json_encode($data));
+                // _d('Data',$data);
+            }else{
+                unset($_POST["modeladdform"]);
+                add_option($option_mws_models, json_encode(array('models' => array($_POST))));
+            }
+        }
+        
+        if (isset($_POST['modelitemdel'])) {
+            // _d($_POST,'POST');
+            $indx = isset($_POST['delid']) ? $_POST['delid'] : false;
+            // _d($indx,'indx');
+            
+            $jsonContent = get_option($option_mws_models); 
+            $data = json_decode($jsonContent, true);
+            $jsonList = $data["models"];
+
+            if(isset($jsonList[$indx])){
+                
+                unset($jsonList[$indx]);
+                
+                $newData = array_values($jsonList);
+                
+                // _d($newData,'newData');
+                update_option($option_mws_models, json_encode(array('models' => $newData)));
+            }
+        }
+        /**
+         * Delete all options at once
+         */
+        if (isset($_POST['modeldelform'])) {
+            delete_option($option_mws_models);
+        }
+        
+        
+        
+        // if ( get_option( $option_mws_models ) !== false ) {
+            $jsonContent = get_option($option_mws_models);
+            $retContent = json_decode($jsonContent);
+            if($jsonContent !== false){
+                $retData = json_decode($jsonContent, true);
+                // _d($retData,'Models');
+            } else {
+                _d('Data NOT FOUND');
+            }
+            
+    } else {
+    echo "You dont have sufficient privilege to perform any action!";
     }
 }
-
-if (isset($_POST['modelitemdel'])) {
-    // _d($_POST,'POST');
-    $indx = isset($_POST['delid']) ? $_POST['delid'] : false;
-    // _d($indx,'indx');
-
-    $jsonContent = get_option($option_mws_models); 
-    $data = json_decode($jsonContent, true);
-    $jsonList = $data["models"];
-
-    if(isset($jsonList[$indx])){
-
-        unset($jsonList[$indx]);
-
-        $newData = array_values($jsonList);
-
-        // _d($newData,'newData');
-        update_option($option_mws_models, json_encode(array('models' => $newData)));
-    }
-}
-/**
- * Delete all options at once
- */
-if (isset($_POST['modeldelform'])) {
-    delete_option($option_mws_models);
-}
-
-
-
-// if ( get_option( $option_mws_models ) !== false ) {
-$jsonContent = get_option($option_mws_models);
-$retContent = json_decode($jsonContent);
-if($jsonContent !== false){
-    $retData = json_decode($jsonContent, true);
-    // _d($retData,'Models');
-} else {
-    _d('Models NOT FOUND');
-}
-
 ?>
 <br />
 <div class="bootstrap-iso">
@@ -70,6 +80,7 @@ if($jsonContent !== false){
         if(isset($msg)){
             echo "<h4>$msg</h4>";
         }
+        if ( current_user_can( 'manage_options' ) ) {
         ?>
         <h3>Add new model</h3>
 
@@ -100,6 +111,9 @@ if($jsonContent !== false){
             <br />
             <input type="submit" name="modeladdform" value="Submit" />
         </form>
+        <?php
+        }
+        ?>
     
     <h3>Model Lists</h3>
             <?php 
@@ -136,10 +150,21 @@ if($jsonContent !== false){
                     <td>
                         <!-- <a href="<?php // echo $adminActionUrl . 'edit&id=' . $index; ?>">Edit</a> -->
                         <!-- <a href="<?php //echo $adminActionUrl . 'delete&id=' . $index; ?>">Delete</a> -->
+                        <?php 
+                        if ( current_user_can( 'manage_options' ) ) {
+                        ?>
                         <form method="post">
                             <input type="hidden" name="delid" value="<?php echo $index; ?>" />
+
                             <input type="submit" name="modelitemdel" class="btn btn-danger" value="Delete" />
                         </form>
+                        <?php
+                        } else {
+                            ?>
+                            You dont have permission to perform any action.
+                            <?php
+                        }
+                        ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
