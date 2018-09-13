@@ -25,7 +25,7 @@ Here is a short description of the plugin.  This should be no more than 150 char
 
 **How to use it**
 
-To use the plugin after you install it to your wordpress website, you have to create a "page" with slug "easy-quote" or you can use shortcode [MWS_EASYQUOTE] 
+To use the plugin create a "page" with shortcode [MWS_EASYQUOTE] 
 
 ---
 
