@@ -1,4 +1,5 @@
-=== Plugin Name ===
+=== Easy Quote ===
+
 Contributors: azraf 
 Contributors Github: https://github.com/azraf
 Donate link: paypal email: donate@azraf.me
