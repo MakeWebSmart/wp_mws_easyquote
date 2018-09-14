@@ -40,7 +40,7 @@ if ( isset($_POST)) {
             echo "<h4>$msg</h4>";
         }
         ?>
-    <h3>Reorder Model Lists</h3>
+    <h3>Reorder Model/Category Lists</h3>
     <?php if($retData){
         ?>
     <p>Drag any item up/down to reorder its position.</p>

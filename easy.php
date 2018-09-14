@@ -55,8 +55,8 @@ echo '<script type="text/javascript">
 	<div id="mws-multistepform-container">
 		<ul id="multistepform-progressbar">
 			<li class="active"><?=$firstStepName?></li>
-			<li>Select Model</li>
-			<li>Issue</li>
+			<li>Select Cateogry</li>
+			<li>Issue/Item</li>
 			<li>Cost</li>
 			<?php
 			if($shortcodeForm){
@@ -76,10 +76,10 @@ echo '<script type="text/javascript">
 		</div>
 		<div  id="mwseq_form_2" class="form">
 			<form action="">
-				<h2 class="fs-title">Select Phone</h2>
-				<h3 class="fs-subtitle">Your Phone Model</h3>
+				<h2 class="fs-title">Select Category</h2>
+				<h3 class="fs-subtitle">Your preferred category</h3>
 				<div class="fields">
-					<div id="modelname" class="wpir_section_heading">Choose Your iPhone Model</div>
+					<div id="modelname" class="wpir_section_heading">Choose Your category</div>
 					<ul class="wpir_field_group list-boxed has-image single-select" data-field_name="model_id">
 						<input type="hidden" name="modelid" id="modelid" value=""  />
 						<?php 
@@ -94,7 +94,7 @@ echo '<script type="text/javascript">
 							<label class="wpir_field_input" for="<?php echo $index;?>">
 								<a href="#/" class="modelselect" title="<?php echo $obj->modelname;?>" id="model-<?php echo $index;?>">
 									<img class="item-image" src="<?php echo mwseq_setModelImage($obj->imagefile);?>">
-									<div class="item-label"><?php echo $obj->modelname;?></div>
+									<div class="item-label"><?php echo esc_html($obj->modelname);?></div>
 								</a>
 							</label>
 						</li>
@@ -116,8 +116,8 @@ echo '<script type="text/javascript">
 		<div id="mwseq_form_3" class="form">
 			<form action="">
 				<h2 class="fs-title">Issue</h2>
-				<h4 id="modelname2">Choose Your iPhone Model First</h4>
-				<h3 class="fs-subtitle">Select your problem/issue</h3>
+				<h4 id="modelname2">Please select a category first</h4>
+				<h3 class="fs-subtitle">Select your problem/issue/items</h3>
 				<div id="issue1" class="hidden">
 					<input type="checkbox" name="issue1" id="inputissue1" class="issueprice" value="" /> <span class="labelissue1"></span> (cost $ <span id="priceissue1"></span> )
 				</div>
@@ -136,7 +136,7 @@ echo '<script type="text/javascript">
 			<form action="">
 				<h2 class="fs-title">Total Cost</h2>
 				<h3 class="fs-subtitle">Review your order detail</h3>
-				<h4 id="modelname3" class="wpir_section_heading">Choose Your iPhone Model First</h4>
+				<h4 id="modelname3" class="wpir_section_heading">Please select a category first</h4>
 				    <div id="issuename1"></div>
 				    <div id="issuename2"></div>
 				    <div id="issuename3"></div>

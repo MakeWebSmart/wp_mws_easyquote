@@ -72,10 +72,10 @@ if($jsonContent !== false){
         }
         if ( current_user_can( 'manage_options' ) ) {
         ?>
-        <h3>Add new model</h3>
+        <h3>Add new model/Category</h3>
 
         <form method="post">
-            <label for="modelname">Model Name</label> <input type="text" class="form-control" name="modelname" value="" /> 
+            <label for="modelname">Model/Category Name</label> <input type="text" class="form-control" name="modelname" value="" /> 
             <br />
             <label for="imagefile">Image File Name</label> <input type="text" class="form-control" name="imagefile"  placeholder="" value="" /> 
             <br />
@@ -85,17 +85,17 @@ if($jsonContent !== false){
                 By default, system using "<?=$defaultImage?>", if no valid image name provided.
             </div>
             <br />
-            <label for="issue1name">Item 1 Name</label> <input type="text" class="form-control" name="issue1name"  value="" /> 
+            <label for="issue1name">Issue/Item 1 Name</label> <input type="text" class="form-control" name="issue1name"  value="" /> 
             <br />
-            <label for="issue1price">Item 1 Price</label> <input type="text" class="form-control" name="issue1price"  value="" /> 
+            <label for="issue1price">Issue/Item 1 Price</label> <input type="text" class="form-control" name="issue1price"  value="" /> 
             <br />
-            <label for="issue2name">Item 2 Name</label> <input type="text" class="form-control" name="issue2name"  value="" /> 
+            <label for="issue2name">Issue/Item 2 Name</label> <input type="text" class="form-control" name="issue2name"  value="" /> 
             <br />
-            <label for="issue2price">Item 2 Price</label> <input type="text" class="form-control" name="issue2price"  value="" /> 
+            <label for="issue2price">Issue/Item 2 Price</label> <input type="text" class="form-control" name="issue2price"  value="" /> 
             <br />
-            <label for="issue3name">Item 3 Name</label> <input type="text" class="form-control" name="issue3name"  value="" /> 
+            <label for="issue3name">Issue/Item 3 Name</label> <input type="text" class="form-control" name="issue3name"  value="" /> 
             <br />
-            <label for="issue3price">Item 3 Price</label> <input type="text" class="form-control" name="issue3price"  value="" /> 
+            <label for="issue3price">Issue/Item 3 Price</label> <input type="text" class="form-control" name="issue3price"  value="" /> 
             <br />
             <?php wp_nonce_field( 'add_model');?>
             <input type="submit" name="modeladdform" value="Submit" />
@@ -104,21 +104,21 @@ if($jsonContent !== false){
         }
         ?>
     
-    <h3>Model Lists</h3>
+    <h3>Model/category Lists</h3>
             <?php 
             if( $jsonContent && isset($retContent->models)){
             ?>
     <div class="table-responsive">
     <table align="center" class="table table-striped table-hover table-bordered">
         <tr>
-            <th>Model Name</th>
+            <th>Model/Category Name</th>
             <th>ImageFile</th>
-            <th>Item 1 Name</th>
-            <th>Item 1 price</th>
-            <th>Item 2 Name</th>
-            <th>Item 2 price</th>
-            <th>Item 3 Name</th>
-            <th>Item 3 price</th>
+            <th>Issue/Item 1 Name</th>
+            <th>Issue/Item 1 price</th>
+            <th>Issue/Item 2 Name</th>
+            <th>Issue/Item 2 price</th>
+            <th>Issue/Item 3 Name</th>
+            <th>Issue/Item 3 price</th>
             <!-- <th>Description of Video</th> -->
             <th>Action</th>
         </tr>
@@ -165,7 +165,7 @@ if($jsonContent !== false){
 <br />
 <br />
 <br />
-<a href="<?php echo admin_url( 'admin.php?page=mws_easyquote_list' );?>" class="btn btn-info">Reorder Model List</a>
+<a href="<?php echo admin_url( 'admin.php?page=mws_easyquote_list' );?>" class="btn btn-info">Re-order Model/category List</a>
 <br />
 <br />
 <br />
