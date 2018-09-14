@@ -12,26 +12,16 @@ if (isset($_POST['optionform'])) {
         $newArr = [];
         
         if ($_POST['shortcode']) {
-            // $newArr['shortcode'] = str_replace('"', '\'', $_POST['shortcode']);
             $newArr['shortcode'] = sanitize_text_field($_POST['shortcode']);
             
         }
         if ($_POST['firstStepName']) {
-            // $newArr['firstStepName'] = $_POST['firstStepName'];
             $newArr['firstStepName'] = sanitize_text_field($_POST['firstStepName']);
         }
         $updateData = json_encode(array('options' => $newArr));
-        // mwseq_d($newArr,'$newArr');
-        // mwseq_d($newArr2,'$newArr-2');
-        // exit();
+        
         update_option($easyquote_options , $updateData);
-        // $jsonContent = get_option($easyquote_options );
-        // $retContent = json_decode($jsonContent);
-        // if($jsonContent !== false){
-        //     $retData = json_decode($jsonContent, true);
-        // } else {
-        //     _d('Models NOT FOUND');
-        // }
+
     } else {
         echo "You dont have sufficient privilege to perform any action!";
     }

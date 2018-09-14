@@ -59,7 +59,7 @@ $retContent = json_decode($jsonContent);
 if($jsonContent !== false){
     $retData = json_decode($jsonContent, true);
 } else {
-    mwseq_d('Data NOT FOUND');
+    echo 'Data NOT FOUND';
 }
 ?>
 <br />
