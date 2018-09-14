@@ -161,7 +161,7 @@ echo '<script type="text/javascript">
 		?>
 			<div id="form5"class="form">
 					<?php
-					$formShortCode	= str_replace("\\'",'"', $optionObj->options->shortcode);
+					$formShortCode	= str_replace('\\','', $optionObj->options->shortcode);
 					echo do_shortcode( $formShortCode );
 					echo '<br />'.$bafckbuttons;
 					?>

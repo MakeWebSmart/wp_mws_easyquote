@@ -102,14 +102,57 @@ if(!function_exists('mws_helpline')){
  * 
  * Only for testing purpose
  */
-// if(!function_exists('mws_d')){
-//     function mws_d($var, $str = '')
-//     {
-//         if (!empty($str)) {
-//             echo '<br />' . $str . '<br />';
-//         } 
-//         echo '<pre>';
-//         print_r($var);
-//         echo '</pre>';
-//     }
-// }
+if(!function_exists('mws_d')){
+    function mws_d($var, $str = '')
+    {
+        if (!empty($str)) {
+            echo '<br />' . $str . '<br />';
+        } 
+        echo '<pre>';
+        print_r($var);
+        echo '</pre>';
+    }
+}
+
+/**
+ * Sanitize all array items (e.g. post fields)
+ * 
+ * $intArr: take array of integers to Integer type casting
+ * $delItems: omit items from return array
+ * 
+ */
+if(!function_exists('mws_sanitize_items')){
+    function mws_sanitize_items($var,$intArr=[],$delItems=[])
+    {
+        if(is_array ($var)){
+            $ret = [];
+            // if exist _wpnonce, omit from return array
+            if(isset($var['_wpnonce'])){
+                unset($var['_wpnonce']);
+            }
+            // if exist _wp_http_referer,  omit it from return array
+            if(isset($var['_wp_http_referer'])){
+                unset($var['_wp_http_referer']);
+            }
+            if(!empty($delItems)){
+                foreach($delItems as $del) {
+                    unset($var[$del]);
+                }
+            }
+            foreach($var as $k=>$v){
+                if(!empty($intArr) && in_array($k,$intArr)){
+                    if(!empty($v)){
+                        $ret[$k] = intval($v);
+                    } else {
+                        $ret[$k] = '';
+                    }
+                }else {
+                    $ret[$k] = sanitize_text_field($v);
+                }
+            }
+            return $ret;
+        } else {
+            return sanitize_text_field($var);
+        }
+    }
+}

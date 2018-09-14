@@ -3,73 +3,63 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $option_mws_models = 'mws_easyquote_items';
 global $wp;
-
 $adminActionUrl = admin_url( "admin.php?page=".$_GET["page"].'&action=' );
-
 $image_root = dirname(dirname(dirname(dirname(__FILE__)))).'/model_images/';
 $image_home = home_url('model_images/');
 $defaultImage = plugins_url('images/iPhone.png',__FILE__ );
 
 if ( isset($_POST)) {
     if ( current_user_can( 'manage_options' ) ) {
-        /* A user with admin privileges */
-        
+        /* A user with admin privileges */  
         if (isset($_POST['modeladdform'])) {
-            $jsonContent = get_option($option_mws_models); 
-            if($jsonContent !== false){
-                $data = json_decode($jsonContent, true);
-                unset($_POST["modeladdform"]);
-                $data["models"] = array_values($data["models"]);
-                array_push($data["models"], $_POST);
-                update_option($option_mws_models, json_encode($data));
-                // _d('Data',$data);
-            }else{
-                unset($_POST["modeladdform"]);
-                add_option($option_mws_models, json_encode(array('models' => array($_POST))));
+            if ( check_admin_referer( 'add_model' ) ) {
+                $jsonContent = get_option($option_mws_models); 
+                $postIntItems = ['issue1price','issue2price','issue3price'];
+                $removeItems = ['modeladdform'];
+                if($jsonContent !== false){
+                    $data = json_decode($jsonContent, true);
+                    $data["models"] = array_values($data["models"]);
+                    array_push($data["models"], mws_sanitize_items($_POST, $postIntItems,$removeItems));
+                    update_option($option_mws_models, json_encode($data));
+                }else{
+                    add_option($option_mws_models, json_encode(array('models' => array(mws_sanitize_items($_POST, $postIntItems,$removeItems)))));
+                }
             }
         }
-        
-        if (isset($_POST['modelitemdel'])) {
-            // _d($_POST,'POST');
-            $indx = isset($_POST['delid']) ? $_POST['delid'] : false;
-            // _d($indx,'indx');
             
-            $jsonContent = get_option($option_mws_models); 
-            $data = json_decode($jsonContent, true);
-            $jsonList = $data["models"];
-
-            if(isset($jsonList[$indx])){
+        if (isset($_POST['modelitemdel'])) {
+            if ( check_admin_referer( 'del_item' ) ) {
+                $indx = isset($_POST['delid']) ? intval($_POST['delid']) : false;
+                $jsonContent = get_option($option_mws_models); 
+                $data = json_decode($jsonContent, true);
+                $jsonList = $data["models"];
                 
-                unset($jsonList[$indx]);
-                
-                $newData = array_values($jsonList);
-                
-                // _d($newData,'newData');
-                update_option($option_mws_models, json_encode(array('models' => $newData)));
+                if(isset($jsonList[$indx])){
+                    unset($jsonList[$indx]);
+                    $newData = array_values($jsonList);
+                    update_option($option_mws_models, json_encode(array('models' => $newData)));
+                }
             }
         }
         /**
          * Delete all options at once
          */
         if (isset($_POST['modeldelform'])) {
-            delete_option($option_mws_models);
-        }
-        
-        
-        
-        // if ( get_option( $option_mws_models ) !== false ) {
-            $jsonContent = get_option($option_mws_models);
-            $retContent = json_decode($jsonContent);
-            if($jsonContent !== false){
-                $retData = json_decode($jsonContent, true);
-                // _d($retData,'Models');
-            } else {
-                _d('Data NOT FOUND');
+            if ( check_admin_referer( 'del_models' ) ) {
+                delete_option($option_mws_models);
             }
-            
+        }
     } else {
-    echo "You dont have sufficient privilege to perform any action!";
-    }
+        echo "You dont have sufficient privilege to perform any action!";
+    } // current_user_can method END
+    // } // Token Validation END
+} // $_POST end
+$jsonContent = get_option($option_mws_models);
+$retContent = json_decode($jsonContent);
+if($jsonContent !== false){
+    $retData = json_decode($jsonContent, true);
+} else {
+    mws_d('Data NOT FOUND');
 }
 ?>
 <br />
@@ -85,8 +75,6 @@ if ( isset($_POST)) {
         <h3>Add new model</h3>
 
         <form method="post">
-            <!-- <input type="hidden" name="modeladdform" value="ok"/> -->
-            <!-- <span class="label">Model Name</span> <input type="text" name="id" value="" />  -->
             <label for="modelname">Model Name</label> <input type="text" class="form-control" name="modelname" value="" /> 
             <br />
             <label for="imagefile">Image File Name</label> <input type="text" class="form-control" name="imagefile"  placeholder="" value="" /> 
@@ -109,6 +97,7 @@ if ( isset($_POST)) {
             <br />
             <label for="issue3price">Item 3 Price</label> <input type="text" class="form-control" name="issue3price"  value="" /> 
             <br />
+            <?php wp_nonce_field( 'add_model');?>
             <input type="submit" name="modeladdform" value="Submit" />
         </form>
         <?php
@@ -138,24 +127,21 @@ if ( isset($_POST)) {
            
             foreach ($retContent->models as $index => $obj): ?>
                 <tr>
-                    <td><?php echo $obj->modelname; ?></td>
-                    <td><?php echo $obj->imagefile; ?></td>
-                    <td><?php echo $obj->issue1name; ?></td>
-                    <td><?php echo $obj->issue1price; ?></td>
-                    <td><?php echo $obj->issue2name; ?></td>
-                    <td><?php echo $obj->issue2price; ?></td>
-                    <td><?php echo $obj->issue3name; ?></td>
-                    <td><?php echo $obj->issue3price; ?></td>
-                    <!-- <td><?php // echo $obj->description; ?></td> -->
+                    <td><?php echo esc_html( $obj->modelname); ?></td>
+                    <td><?php echo esc_html( $obj->imagefile); ?></td>
+                    <td><?php echo esc_html( $obj->issue1name); ?></td>
+                    <td><?php echo esc_html( $obj->issue1price); ?></td>
+                    <td><?php echo esc_html( $obj->issue2name); ?></td>
+                    <td><?php echo esc_html( $obj->issue2price); ?></td>
+                    <td><?php echo esc_html( $obj->issue3name); ?></td>
+                    <td><?php echo esc_html( $obj->issue3price); ?></td>
                     <td>
-                        <!-- <a href="<?php // echo $adminActionUrl . 'edit&id=' . $index; ?>">Edit</a> -->
-                        <!-- <a href="<?php //echo $adminActionUrl . 'delete&id=' . $index; ?>">Delete</a> -->
                         <?php 
                         if ( current_user_can( 'manage_options' ) ) {
                         ?>
                         <form method="post">
                             <input type="hidden" name="delid" value="<?php echo $index; ?>" />
-
+                            <?php wp_nonce_field( 'del_item');?>
                             <input type="submit" name="modelitemdel" class="btn btn-danger" value="Delete" />
                         </form>
                         <?php
@@ -184,6 +170,7 @@ if ( isset($_POST)) {
 <br />
 <br />
      <form method="post">
+        <?php wp_nonce_field( 'del_models');?>
         <input type="submit" name="modeldelform" class="btn btn-danger" value="Delete All Models" />
     </form>
        <br />

@@ -14,10 +14,10 @@ if($jsonContent !== false){
 }
 if ( isset($_POST)) {
     if ( current_user_can( 'manage_options' ) ) {
-        if (isset($_POST['updateorder'])) {
+        if (isset($_POST['updateorder']) && check_admin_referer( 'order_models' )) {
             $newArr = [];
             foreach($_POST['modelorder'] as $k=>$v){
-                $newArr[$k] = $retData['models'][$v];
+                $newArr[$k] = $retData['models'][intval($v)];
             }
             update_option($option_mws_models, json_encode(array('models' => $newArr)));
             $jsonContent = get_option($option_mws_models);
@@ -56,6 +56,7 @@ if ( isset($_POST)) {
         <?php
         if ( current_user_can( 'manage_options' ) ) {
         ?>
+        <?php wp_nonce_field( 'order_models');?>
         <input type="submit" name="updateorder" class="btn btn-danger" value="Submit New Order" />
         <?php
         } else {
