@@ -22,8 +22,8 @@ if (isset($_POST['optionform'])) {
             $newArr['firstStepName'] = sanitize_text_field($_POST['firstStepName']);
         }
         $updateData = json_encode(array('options' => $newArr));
-        // mws_d($newArr,'$newArr');
-        // mws_d($newArr2,'$newArr-2');
+        // mwseq_d($newArr,'$newArr');
+        // mwseq_d($newArr2,'$newArr-2');
         // exit();
         update_option($easyquote_options , $updateData);
         // $jsonContent = get_option($easyquote_options );

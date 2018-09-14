@@ -102,8 +102,8 @@ if(!function_exists('mws_helpline')){
  * 
  * Only for testing purpose
  */
-if(!function_exists('mws_d')){
-    function mws_d($var, $str = '')
+if(!function_exists('mwseq_d')){
+    function mwseq_d($var, $str = '')
     {
         if (!empty($str)) {
             echo '<br />' . $str . '<br />';
