@@ -5,7 +5,6 @@ $easyquote_options = 'mws_easyquote_options';
 global $wp;
 $shortcode = '';
 $firstStepName = '';
-$adminActionUrl = admin_url( "admin.php?page=".$_GET["page"].'&action=' );
 $options_mws_easyquote = false;
 
 if (isset($_POST['optionform'])) {
