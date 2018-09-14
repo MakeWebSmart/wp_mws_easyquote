@@ -21,7 +21,8 @@ jQuery(document).ready(function ($) {
                 //var cont = $('<div id="'+FORM.opts['container']+'" class="multistepform" style="display:none; position: absolute; top:0; width: 100%; height: 100%; z-index: 9999;"></div>');
                 var cont = $('<div id="'+FORM.opts['container']+'" class="multistepform" style="display:none; width: 100%; height: 100%; z-index: 9999;"></div>');
                 $('body').append(cont);
-                cont.html('<div id="multistepform"><div class="bg"></div><div class="close"></div><div id="multistepform-container"></div></div>');
+                // cont.html('<div id="multistepform"><div class="bg"></div><div class="close"></div><div id="multistepform-container"></div></div>');
+                cont.html('<div id="multistepform"><div class="bg"></div><div id="multistepform-container"></div></div>');
                 $.get(FORM.opts['form_url'], function( data ) {
                     $('#multistepform-container').html(data);
                     FORM._show();
@@ -36,7 +37,8 @@ jQuery(document).ready(function ($) {
                     'z-index': 9999
                 });
                 var data = cont.html();
-                cont.html('<div id="multistepform"><div class="bg"></div><div class="close"></div><div id="multistepform-container">'+data+'</div></div>');
+                // cont.html('<div id="multistepform"><div class="bg"></div><div class="close"></div><div id="multistepform-container">'+data+'</div></div>');
+                cont.html('<div id="multistepform"><div class="bg"></div><div id="multistepform-container">'+data+'</div></div>');
                 FORM._show();
             }        
         },

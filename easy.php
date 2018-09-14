@@ -7,7 +7,7 @@ $currentUrl =  home_url( $wp->request );
 
 $option_mws_models = 'mws_easyquote_items';
 $easyquote_options = 'mws_easyquote_options';
-$dataObj = false;
+$mwsEQdataObj = false;
 $optionObj = false;
 $shortcodeForm = false;
 $firstStepName = 'Post Code';
@@ -15,7 +15,7 @@ $bafckbuttons = '<a class="btn button" href="'.$currentUrl.'">Back To Form</a> &
 
 $jsonContent = get_option($option_mws_models); 
 if($jsonContent !== false){
-	$dataObj = json_decode($jsonContent);
+	$mwsEQdataObj = json_decode($jsonContent);
 }
 
 $jsonOptions = get_option($easyquote_options );
@@ -49,7 +49,7 @@ function mwseq_setModelImage($filename=''){
 <?php
 get_header();
 echo '<script type="text/javascript">
-	var dataObj = '. $jsonContent.';
+	var mwsEQdataObj = '. $jsonContent.';
 	</script>';
 ?>
 	<div id="mws-multistepform-container">
@@ -67,14 +67,14 @@ echo '<script type="text/javascript">
 			?>
 		</ul>
 		<div class="form">
-			<form id="form1" action="">
+			<form id="mwseq_form_1" action="">
 				<h2 class="fs-title">We'll Come To You</h2>
 				<h3 class="fs-subtitle">Tell Us your <?=$firstStepName?></h3>
 				<input type="text" name="postcode" placeholder="<?=$firstStepName?>">
 				<input type="button" name="next" class="next button" value="Next">
 			</form>
 		</div>
-		<div  id="form2" class="form">
+		<div  id="mwseq_form_2" class="form">
 			<form action="">
 				<h2 class="fs-title">Select Phone</h2>
 				<h3 class="fs-subtitle">Your Phone Model</h3>
@@ -84,7 +84,7 @@ echo '<script type="text/javascript">
 						<input type="hidden" name="modelid" id="modelid" value=""  />
 						<?php 
 						$modelFound = false;
-						foreach ($dataObj->models as $index => $obj): ?>
+						foreach ($mwsEQdataObj->models as $index => $obj): ?>
 							<?php 
 							if(!empty($obj->modelname)){
 								$modelFound = true;
@@ -113,7 +113,7 @@ echo '<script type="text/javascript">
 				<input type="button" name="next" class="next button" value="Next" disabled="disabled">
 			</form>
 		</div>
-		<div id="form3" class="form">
+		<div id="mwseq_form_3" class="form">
 			<form action="">
 				<h2 class="fs-title">Issue</h2>
 				<h4 id="modelname2">Choose Your iPhone Model First</h4>
@@ -132,7 +132,7 @@ echo '<script type="text/javascript">
 				<input type="button" name="next" class="next button" value="Next" disabled="disabled">
 			</form>
 		</div>
-		<div id="form4" class="form">
+		<div id="mwseq_form_4" class="form">
 			<form action="">
 				<h2 class="fs-title">Total Cost</h2>
 				<h3 class="fs-subtitle">Review your order detail</h3>
@@ -159,7 +159,7 @@ echo '<script type="text/javascript">
 		<?php
 		if($shortcodeForm){
 		?>
-			<div id="form5"class="form">
+			<div id="mwseq_form_5"class="form">
 					<?php
 					$formShortCode	= str_replace('\\','', $optionObj->options->shortcode);
 					echo do_shortcode( $formShortCode );
