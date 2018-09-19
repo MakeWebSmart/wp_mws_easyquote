@@ -34,7 +34,7 @@ if($jsonOptions !== false){
 
 function mwseq_setModelImage($filename=''){
 	$image_root = dirname(__FILE__) . '/images/';
-  $image_home = plugins_url('/images/',__FILE__ );
+	$image_home = plugins_url('/images/',__FILE__ );
 	$defaultImage = plugins_url('/images/iPhone.png',__FILE__ );
 	$filename = trim($filename);
 	$is_image = false;
