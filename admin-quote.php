@@ -5,12 +5,12 @@ $option_mws_models = 'mws_easyquote_items';
 global $wp;
 $upload_dir = wp_upload_dir();
 $adminActionUrl = admin_url( "admin.php?page=".$_GET["page"].'&action=' );
-$image_root = $upload_dir['basedir'] . '/easy-quote/images';
-$image_home = $upload_dir['baseurl'] . '/easy-quote/images/';
+$image_root = $upload_dir['basedir'] . '/easy-quote';
+$image_home = $upload_dir['baseurl'] . '/easy-quote/';
 $defaultImage = plugins_url('images/iPhone.png',__FILE__ );
 
 if(!is_dir($image_root)){
-    mkdir($image_root, 0755,true);
+    mkdir($image_root, 0755);
 }
 
 if ( isset($_POST)) {
