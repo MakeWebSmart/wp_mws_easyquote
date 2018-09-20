@@ -33,6 +33,7 @@ if($jsonOptions !== false){
 }
 
 function mwseq_setModelImage($filename=''){
+	$upload_dir = wp_upload_dir();
 	$image_root = $upload_dir['basedir'] . '/easy-quote';
 	$image_home = $upload_dir['baseurl'] . '/easy-quote/';
 	$defaultImage = plugins_url('/images/iPhone.png',__FILE__ );
