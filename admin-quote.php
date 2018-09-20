@@ -11,6 +11,7 @@ $defaultImage = plugins_url('images/iPhone.png',__FILE__ );
 
 if(!is_dir($image_root)){
     mkdir($image_root, 0755);
+    file_put_contents($image_root.'/index.html','<html><head><head><body>Blank-Page</body></html>');
 }
 
 if ( isset($_POST)) {
