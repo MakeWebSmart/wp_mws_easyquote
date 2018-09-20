@@ -3,13 +3,14 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $option_mws_models = 'mws_easyquote_items';
 global $wp;
+$upload_dir = wp_upload_dir();
 $adminActionUrl = admin_url( "admin.php?page=".$_GET["page"].'&action=' );
-$image_root = dirname(__FILE__) . '/images/';
-$image_home = plugins_url('/images/',__FILE__ );
+$image_root = $upload_dir['basedir'] . '\easy-quote\images';
+$image_home = $upload_dir['baseurl'] . '/easy-quote/images/';
 $defaultImage = plugins_url('images/iPhone.png',__FILE__ );
 
 if(!is_dir($image_root)){
-    mkdir($image_root, 0755);
+    mkdir($image_root, 0755,true);
 }
 
 if ( isset($_POST)) {
