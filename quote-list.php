@@ -17,7 +17,7 @@ if ( isset($_POST)) {
         if (isset($_POST['updateorder']) && check_admin_referer( 'order_models' )) {
             $newArr = [];
             foreach($_POST['modelorder'] as $k=>$v){
-                $newArr[$k] = $retData['models'][intval($v)];
+                $newArr[intval($k)] = $retData['models'][intval($v)];
             }
             update_option($option_mws_models, json_encode(array('models' => $newArr)));
             $jsonContent = get_option($option_mws_models);
