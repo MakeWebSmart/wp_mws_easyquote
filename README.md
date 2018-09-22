@@ -40,7 +40,7 @@ https://youtu.be/lIiPOMS6IjA
 
 
 ## Little Customization
-Need little customization? donate me a cup of coffee (paypal: donate@azraf.me) and knock me with detail
+Need little customization? Please consider a little donation (paypal: donate@azraf.me) and knock me with detail
 
 ## Full customization
 Hire me to rewrite the plugin according to your requirements / wordpress website features.
