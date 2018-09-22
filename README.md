@@ -45,10 +45,7 @@ Optionally, you can add any other plugins short-code at the last step. E.g. you 
 ---
 
 # Multistep Quoting Plugin Install and setting up:
-
-http://img.youtube.com/vi/lIiPOMS6IjA/0.jpg
-
-https://youtu.be/lIiPOMS6IjA
+[![Watch the video](http://img.youtube.com/vi/lIiPOMS6IjA/0.jpg)](https://youtu.be/lIiPOMS6IjA)
 
 
 ## Little Customization
