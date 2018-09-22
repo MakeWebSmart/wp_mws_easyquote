@@ -3,7 +3,7 @@
 Plugin Name: Easy Quote
 Plugin URI:  https://github.com/MakeWebSmart/wp_mws_easyquote
 Description: A simple WordPress OnePage Quote plugin by MakeWebSmart(mws)
-Version: 1.3
+Version: 0.9
 Author: Azraf Anam
 Author URI: http://azraf.me
 */

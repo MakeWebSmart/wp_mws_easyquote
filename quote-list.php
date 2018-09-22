@@ -1,7 +1,5 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
-
-$jsonFile = 'models.json';
 $option_mws_models = 'mws_easyquote_items';
 global $wp;
 $retData = false;

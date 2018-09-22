@@ -3,7 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 $option_mws_models = 'mws_easyquote_items';
 global $wp;
-$adminActionUrl = admin_url( "admin.php?page=".$_GET["page"].'&action=' );
 $upload_dir = wp_upload_dir();
 $image_root = $upload_dir['basedir'] . '/easy-quote';
 $image_home = $upload_dir['baseurl'] . '/easy-quote/';
