@@ -11,7 +11,7 @@ Requires PHP: 5.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Easily add quote functionality to wp. User can select service category & items and will see the price and (optionally) with a contact form.
 
 
 **How to use it**
@@ -31,11 +31,23 @@ After Installation, you will find a menu named "EasyQuote" in your wordpress adm
 5. You can Add short-code to display form or any other content at the end of the quoting form, from the menu **EasyQuote Option Page**
 6. You can customize the quoting form first step name with the option **First step field name** found in the menu page **EasyQuote Option Page**
 
+---
+
+## Description
+
+You can easily add an quote functionality to your Wordpress website. 
+
+The system will let user to choose your service-category/products first. When user select any catetegory/product, then it will show the child items name along with its price. 
+If user select one or multiple items, it will show total price.
+
+Optionally, you can add any other plugins short-code at the last step. E.g. you can use any form plugin short-code to show up a contact form to collect user data or manual booking.
 
 ---
 
-
 # Multistep Quoting Plugin Install and setting up:
+
+http://img.youtube.com/vi/lIiPOMS6IjA/0.jpg
+
 https://youtu.be/lIiPOMS6IjA
 
 
